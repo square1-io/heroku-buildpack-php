@@ -3,7 +3,7 @@
 ## What makes it unique?
 
 * **Faster** deployments, because the runtime environment is built from precompiled binaries via Heroku's "vulcan"
-* Supports both the latest 5.3 _and_ 5.4 versions
+* Supports the latest 5.3, 5.4  _and_ 5.5 versions
 * Uses the memory of the dyno more efficiently by going with NGINX and PHP-FPM.
 * Supports Composer out of the box
 * No writing NGINX configuration files: supports Classic PHP, Yii, Silex and Symfony 2 apps with simple configuration driven by your `composer.json`.
