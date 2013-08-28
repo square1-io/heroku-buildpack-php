@@ -3,18 +3,8 @@ server {
     listen <%= ENV['PORT'] %>;
     root <%= ENV['DOCUMENT_ROOT'] %>;
 
-    # Block access to protected, framework
-    location ~ /(protected|framework) {
-        deny all;
-        access_log off;
-        log_not_found off;
-    }
-
-    # Block access to theme-folder views directories
-    location ~ /themes/\w+/views {
-        deny all;
-        access_log off;
-        log_not_found off;
+    location ~ ^/(protected|framework|themes/\w+/views) {
+        deny  all;
     }
 
     # Attempt the uri, uri+/, then fall back to yii's index.php with args included
@@ -22,7 +12,7 @@ server {
         try_files $uri $uri/ /index.php?$args;
     }
 
-    location ~ ^/(app|app_dev)\.php(/|$) {
+    location ~ \.php {
         fastcgi_pass unix:/tmp/php-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
