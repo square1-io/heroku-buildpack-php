@@ -6,13 +6,13 @@
 * Supports both the latest 5.3 _and_ 5.4 versions
 * Uses the memory of the dyno more efficiently by going with NGINX and PHP-FPM.
 * Supports Composer out of the box
-* No writing NGINX configuration files: supports Classic PHP, Silex and Symfony 2 apps with simple configuration driven by your `composer.json`.
+* No writing NGINX configuration files: supports Classic PHP, Yii, Silex and Symfony 2 apps with simple configuration driven by your `composer.json`.
 * Zero-Configuration Symfony 2 deployment.
 
 ## What works?
 
 * Basic provisioning
-* NGINX Configuration for frameworks `silex` and `symfony2`
+* NGINX Configuration for frameworks `silex`, `yii` and `symfony2`
 * Reading configuration from `composer.json`
 
 ## Stack
@@ -70,7 +70,7 @@ Available presets:
 
 * `silex` (needs `document-root` and `index-document` set)
 * `symfony2`
-* `yii`
+* `yii` (needs `document-root` and `index-document` set)
 
 Example:
 
@@ -146,6 +146,17 @@ Is used when the app requires the `silex/silex` package or when the
 Options:
 
 * `index-document`: With Silex apps, this should be the file where `$app->run()`
+  is called. All requests which don't match an existing file will be forwarded to
+  this document.
+
+### Yii
+
+Is used when the app requires the `yiisoft/yii"` package or when the 
+`extra.heroku.framework` key is set to `yii` in the `composer.json`.
+
+Options:
+
+* `index-document`: With Yii apps, this should be the file where `$app->run()`
   is called. All requests which don't match an existing file will be forwarded to
   this document.
 
