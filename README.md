@@ -70,6 +70,7 @@ Available presets:
 
 * `silex` (needs `document-root` and `index-document` set)
 * `symfony2`
+* `yii`
 
 Example:
 
