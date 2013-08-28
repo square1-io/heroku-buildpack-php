@@ -4,7 +4,7 @@ BUILD_DIR="$2"
 basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 
 function requires_yii() {
-    [ $(jq --raw-output '.require["symfony/symfony"]' < "$BUILD_DIR/composer.json") != "null" ]
+    [ $(jq --raw-output '.require["yiisoft/yii"]' < "$BUILD_DIR/composer.json") != "null" ]
 }
 
 function sets_framework_yii() {
