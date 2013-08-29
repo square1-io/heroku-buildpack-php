@@ -25,13 +25,11 @@ function fetch_package() {
 
 function indent() {
 
-    echo "-----> aa"
     c='s/^/       /'
     case $(uname) in
         Darwin) sed -l "$c";;
         *)      sed -u "$c";;
     esac
-    echo "-----> cc"
 }
 
 function install_composer_deps() {
@@ -47,7 +45,6 @@ function install_composer_deps() {
 
     echo "-----> Installing application dependencies with Composer"
     {
-        echo "-----> 1"
         cd "$target"
         "$BUILD_DIR/vendor/php/bin/php" \
             "$target/vendor/composer/bin/composer.phar" install \
@@ -55,10 +52,8 @@ function install_composer_deps() {
             --optimize-autoloader \
             --no-interaction
 
-        echo "-----> 2"
         cd "$cwd"
     } | indent
-    echo "-----> 3"
 }
 
 function mktmpdir() {
@@ -100,10 +95,6 @@ function package_compile_cmd() {
 BUILD_DIR="$1"
 CACHE_DIR="$2"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/vendor/local/lib"
-
-
-echo "-----> BUILD ${BUILD_DIR} | CACHE ${CACHE_DIR}"
-
 
 cd "$BUILD_DIR"
 
