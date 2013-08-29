@@ -24,11 +24,15 @@ function fetch_package() {
 }
 
 function indent() {
+
+    echo "-----> aa"
     c='s/^/       /'
     case $(uname) in
+    echo "-----> bb"
         Darwin) sed -l "$c";;
         *)      sed -u "$c";;
     esac
+    echo "-----> cc"
 }
 
 function install_composer_deps() {
