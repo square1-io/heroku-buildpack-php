@@ -61,7 +61,7 @@ build_command=$(cat <<BUILD_CMD
     && mkdir -p "/app/vendor/php/libmcrypt" \
     && mkdir -p "/app/vendor/php/etc/conf.d" \
     && cd libmcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/php/libmcrypt --disable-posix-threads --enable-dynamic-loading && make && make install \
-    && cd zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/php/zlib && make && make install \
+    && cd ../zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/php/zlib && make && make install \
     && cd ../php-${php_version} && ./configure --prefix=/app/vendor/php \
     --with-config-file-path=/app/vendor/php/etc \
     --with-config-file-scan-dir=/app/vendor/php/etc/conf.d \
