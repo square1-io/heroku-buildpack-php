@@ -17,15 +17,25 @@ if [ -z "$PHP_ZLIB_VERSION" ]; then
     PHP_ZLIB_VERSION=1.2.8
 fi
 
+if [ -z "$LIBMCRYPT_VERSION" ]; then
+    LIBMCRYPT_VERSION=2.5.8
+fi
 echo "-----> Packaging PHP $php_version"
 
-tempdir="$( mktemp -t php_xxxx )"
+tempdir="$( mktemp -t php_XXXX )"
 rm -rf $tempdir
 mkdir -p $tempdir
+
+echo $tempdir
+
 cd $tempdir
 
-echo "-----> Downloading dependency zlib ${zlib_version}"
 
+echo "-----> Downloading dependency libmcrypt ${LIBMCRYPT_VERSION}"
+curl -L -o "libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz?r=&ts=1337060759&use_mirror=nchc"
+tar -xzvf "libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
+
+echo "-----> Downloading dependency zlib ${PHP_ZLIB_VERSION}"
 curl -LO "http://zlib.net/zlib-${PHP_ZLIB_VERSION}.tar.gz"
 tar -xzvf "zlib-${PHP_ZLIB_VERSION}.tar.gz"
 
@@ -50,7 +60,9 @@ fi
 
 build_command=$(cat <<BUILD_CMD
     mkdir -p "/app/vendor/php/zlib" \
+    && mkdir -p "/app/vendor/php/mcrypt" \
     && mkdir -p "/app/vendor/php/etc/conf.d" \
+    && cd mcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/php/mcrypt --disable-rpath && make && make install \
     && cd zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/php/zlib && make && make install \
     && cd ../php-${php_version} && ./configure --prefix=/app/vendor/php \
     --with-config-file-path=/app/vendor/php/etc \
@@ -66,6 +78,7 @@ build_command=$(cat <<BUILD_CMD
     --with-jpeg-dir=/usr \
     --with-png-dir=/usr \
     --with-zlib=/app/vendor/php/zlib \
+    --with-mcrypt=/app/vendor/php/mcrypt \
     --with-openssl \
     --enable-soap \
     --enable-xmlreader \
