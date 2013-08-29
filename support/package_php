@@ -26,8 +26,6 @@ tempdir="$( mktemp -t php_XXXX )"
 rm -rf $tempdir
 mkdir -p $tempdir
 
-echo $tempdir
-
 cd $tempdir
 
 
@@ -60,9 +58,9 @@ fi
 
 build_command=$(cat <<BUILD_CMD
     mkdir -p "/app/vendor/php/zlib" \
-    && mkdir -p "/app/vendor/php/mcrypt" \
+    && mkdir -p "/app/vendor/php/libmcrypt" \
     && mkdir -p "/app/vendor/php/etc/conf.d" \
-    && cd mcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/php/mcrypt --disable-rpath && make && make install \
+    && cd libmcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/php/libmcrypt --disable-rpath && make && make install \
     && cd zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/php/zlib && make && make install \
     && cd ../php-${php_version} && ./configure --prefix=/app/vendor/php \
     --with-config-file-path=/app/vendor/php/etc \
@@ -78,7 +76,7 @@ build_command=$(cat <<BUILD_CMD
     --with-jpeg-dir=/usr \
     --with-png-dir=/usr \
     --with-zlib=/app/vendor/php/zlib \
-    --with-mcrypt=/app/vendor/php/mcrypt \
+    --with-mcrypt=/app/vendor/php/libmcrypt \
     --with-openssl \
     --enable-soap \
     --enable-xmlreader \
