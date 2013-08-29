@@ -44,6 +44,7 @@ function install_composer_deps() {
 
     echo "-----> Installing application dependencies with Composer"
     {
+        echo "-----> 1"
         cd "$target"
         "$BUILD_DIR/vendor/php/bin/php" \
             "$target/vendor/composer/bin/composer.phar" install \
@@ -51,8 +52,10 @@ function install_composer_deps() {
             --optimize-autoloader \
             --no-interaction
 
+        echo "-----> 2"
         cd "$cwd"
     } | indent
+    echo "-----> 3"
 }
 
 function mktmpdir() {

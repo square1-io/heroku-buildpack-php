@@ -30,7 +30,7 @@ cd $tempdir
 
 
 echo "-----> Downloading dependency libmcrypt ${LIBMCRYPT_VERSION}"
-curl -L -o "libmcrypt-${LIBMCRYPT_VERSION}.tar.gz" "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz?r=&ts=1337060759&use_mirror=nchc"
+curl -LO "http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 tar -xzvf "libmcrypt-${LIBMCRYPT_VERSION}.tar.gz"
 
 echo "-----> Downloading dependency zlib ${PHP_ZLIB_VERSION}"
