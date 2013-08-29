@@ -99,9 +99,7 @@ function package_compile_cmd() {
 
 BUILD_DIR="$1"
 CACHE_DIR="$2"
-
-
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/vendor/php/libmcrypt"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/vendor/local/lib"
 
 
 echo "-----> BUILD ${BUILD_DIR} | CACHE ${CACHE_DIR}"

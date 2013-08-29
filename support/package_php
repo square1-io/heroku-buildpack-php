@@ -57,11 +57,10 @@ SH
 fi
 
 build_command=$(cat <<BUILD_CMD
-    mkdir -p "/app/vendor/php/zlib" \
-    && mkdir -p "/app/vendor/php/libmcrypt" \
+    mkdir -p "/app/vendor/local" \
     && mkdir -p "/app/vendor/php/etc/conf.d" \
-    && cd libmcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/php/libmcrypt --disable-posix-threads --enable-dynamic-loading && make && make install \
-    && cd ../zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/php/zlib && make && make install \
+    && cd libmcrypt-${LIBMCRYPT_VERSION} && ./configure --prefix=/app/vendor/local --disable-posix-threads --enable-dynamic-loading && make && make install \
+    && cd ../zlib-${PHP_ZLIB_VERSION} && ./configure --prefix=/app/vendor/local && make && make install \
     && cd ../php-${php_version} && ./configure --prefix=/app/vendor/php \
     --with-config-file-path=/app/vendor/php/etc \
     --with-config-file-scan-dir=/app/vendor/php/etc/conf.d \
@@ -75,8 +74,8 @@ build_command=$(cat <<BUILD_CMD
     --enable-zip \
     --with-jpeg-dir=/usr \
     --with-png-dir=/usr \
-    --with-zlib=/app/vendor/php/zlib \
-    --with-mcrypt=/app/vendor/php/libmcrypt \
+    --with-zlib=/app/vendor/local \
+    --with-mcrypt=/app/vendor/local \
     --with-openssl \
     --enable-soap \
     --enable-xmlreader \
