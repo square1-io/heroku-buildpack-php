@@ -48,7 +48,7 @@ function install_composer_deps() {
     echo "-----> Installing application dependencies with Composer"
     {
         echo "-----> 1"
-        LD_LIBRARY_PATH=$BUILD_DIR/vendor/php/libmcrypt/lib/
+        LD_LIBRARY_PATH=$BUILD_DIR/vendor/php
         cd "$target"
         "$BUILD_DIR/vendor/php/bin/php" \
             "$target/vendor/composer/bin/composer.phar" install \
