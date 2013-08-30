@@ -94,7 +94,7 @@ function package_compile_cmd() {
 
 BUILD_DIR="$1"
 CACHE_DIR="$2"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/vendor/local/lib"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${BUILD_DIR}/vendor/php/local/lib"
 
 cd "$BUILD_DIR"
 
